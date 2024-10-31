@@ -1,13 +1,17 @@
-// app/page.tsx
-
 import {QueryClient} from "@tanstack/react-query";
+import {fetchAllRegionPrices} from "@/lib/api";
 
 export default async function Home() {
     const queryClient = new QueryClient()
 
-    return (
-        <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    await queryClient.prefetchQuery({
+        queryKey: ["allRegionPrices"],
+        queryFn: () => fetchAllRegionPrices(),
+    });
 
+    return (
+        <div>
+            <h1>Region Prices for the Last Hour</h1>
         </div>
     );
 }
