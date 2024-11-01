@@ -1,24 +1,27 @@
-import { regions } from "@/lib/constants/regions";
-import { FetchResponse } from "@/lib/interfaeces/FetchResponse";
+import {regions} from "@/lib/constants/regions";
+import {FetchResponse} from "@/lib/interfaces/FetchResponse";
 
 export const fetchAllRegionPrices = async () => {
-    const { start, end } = getLastHourTimestamps();
+    const {start, end} = getLastHourTimestamps();
 
-    // fetch all regions one by one
     const requests = regions.map(async (region) => {
-        const response = await fetch(`https://api.energy-charts.info/price?bzn=${region.regionCode}&start=${start}&end=${end}`);
+        const response = await fetch(`/api/all-region-prices?bzn=${region.regionCode}&start=${start}&end=${end}`);
 
         if (!response.ok) {
-            throw new Error(`Failed to fetch price for region ${region.regionCode}`);
+            return {
+                price: "Couldn't fetch " + region.regionName + " price",
+                regionCode: region.regionCode,
+                regionName: region.regionName
+            };
         }
 
         const data: FetchResponse = await response.json();
-        return { price: data.price[0], regionCode: region.regionCode, regionName: region.regionName };
+        return {price: data.price[0], regionCode: region.regionCode, regionName: region.regionName};
     });
 
-    // wait for every fetch and then make an Array from it
-    return Promise.all(requests);
+    return Promise.all(requests); // waits for all calls and create and array of objects
 };
+
 
 const getLastHourTimestamps = () => {
     const now = new Date();

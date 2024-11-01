@@ -1,5 +1,5 @@
 export interface Region {
-    region: string,
+    regionName: string,
     regionCode: string,
-    price: number
+    price: number;
 }
