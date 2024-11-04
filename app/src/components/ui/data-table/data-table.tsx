@@ -31,12 +31,12 @@ export function DataTable<TData, TValue>({
 
     const {data} = useQuery({
         queryKey: [queryKey],
-        // @ts-ignore
         queryFn: () => fetchAllRegionPrices(),
+        //Placeholder data till price is fetched
         placeholderData: regions.map(region => ({
             regionCode: region.regionCode,
             regionName: region.regionName,
-            price: 0, // Placeholder for price until actual data is fetched
+            price: 0,
         })),
     });
 
@@ -51,6 +51,7 @@ export function DataTable<TData, TValue>({
             sorting,
             globalFilter,
         },
+        // Filter data in search input
         globalFilterFn: (row, columnId, filterValue) => {
             if (columnId === "regionCode" || columnId === "regionName") {
                 const cellValue = row.getValue(columnId) as string;

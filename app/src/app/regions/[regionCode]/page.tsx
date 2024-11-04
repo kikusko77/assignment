@@ -1,28 +1,46 @@
-// import { dehydrate, QueryClient } from "@tanstack/react-query";
-// import { fetchAllRegionPrices } from "@/lib/api";
-// import { DataTable } from "@/components/ui/data-table/data-table";
-// import { columns } from "@/components/ui/data-table/columns";
-// import { HydrationBoundary } from "@tanstack/react-query";
-//
-// export default async function Home() {
-//     // Create a QueryClient instance
-//     const queryClient = new QueryClient();
-//
-//     // Fetch data on the server side
-//     const data = await fetchAllRegionPrices();
-//
-//     // Set the data in React Query's cache
-//     queryClient.setQueryData(["allRegionPrices"], data);
-//
-//     // Dehydrate the cache
-//     const dehydratedState = dehydrate(queryClient);
-//
-//     return (
-//         <div>
-//             <h1>Region Prices for the Last Hour</h1>
-//
-//             {/* Hydrate React Query with server-fetched data */}
-//             <DataTable columns={columns} data={data} />
-//         </div>
-//     );
-// }
+import {regions} from "@/lib/constants/regions";
+import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
+import {fetchCurrentPrice} from "@/lib/api";
+import {dehydrate, HydrationBoundary, QueryClient} from "@tanstack/react-query";
+import CurrentPrices from "@/app/regions/[regionCode]/current-prices";
+import DailyPrices from "@/app/regions/[regionCode]/daily-prices";
+
+// @ts-ignore
+export default async function RegionDetail({params: {regionCode}}) {
+    const region = regions.find((region) => region.regionCode === regionCode)
+    const queryClient = new QueryClient();
+
+    await queryClient.prefetchQuery({
+        queryKey: ["regionPrice", regionCode],
+        queryFn: () => fetchCurrentPrice(regionCode),
+    });
+    const dehydratedState = dehydrate(queryClient);
+
+
+    return (
+        <>
+            <div className='flex items-center justify-center'>
+                <h1 className='text-2xl sm:text-4xl font-bold mb-6'>Detail of region {region?.regionName}</h1>
+            </div>
+            <Tabs
+                className="flex w-full flex-col items-center"
+                defaultValue="current_prices"
+            >
+                <TabsList className="max-w-full overflow-x-auto overflow-y-hidden">
+                    <TabsTrigger value="current_prices">Current Prices</TabsTrigger>
+                    <TabsTrigger value="daily_prices">Daily Prices</TabsTrigger>
+                </TabsList>
+                <HydrationBoundary state={dehydratedState}>
+                    <TabsContent className="w-full" value="current_prices">
+                        <CurrentPrices regionCode={regionCode}/>
+                    </TabsContent>
+                    <TabsContent className="w-full" value="daily_prices">
+                        <DailyPrices regionCode={regionCode}/>
+                    </TabsContent>
+                </HydrationBoundary>
+
+            </Tabs>
+        </>
+
+    );
+}

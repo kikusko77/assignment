@@ -1,13 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    rewrites(){
+    async rewrites() {
         return [
             {
                 source: '/',
-                destination: '/regions'
-            }
-        ]
-    }
+                destination: '/regions',
+            },
+            {
+                source: '/:regionCode',
+                destination: '/regions/:regionCode',
+            },
+        ];
+    },
 };
 
 export default nextConfig;

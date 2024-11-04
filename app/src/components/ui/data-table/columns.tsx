@@ -62,7 +62,7 @@ export const columns: ColumnDef<Region>[] = [
             return (
                 <div className="hidden sm:inline-block">
                     {row.original.price === 0 ?
-                        <Loader className="animate-spin"/> : row.original.price}
+                        <Loader className="animate-spin"/> : row.original.price + '€'}
                 </div>
             )
         }
@@ -74,7 +74,7 @@ export const columns: ColumnDef<Region>[] = [
             const router = useRouter();
             const handleDetailClick = () => {
                 const regionCode = row.getValue("regionCode");
-                router.push(`/${regionCode}`);
+                router.push(`/${regionCode}`); // Route to region detail
             };
             return (
                 <Button className="bg-blue-600 text-white" onClick={handleDetailClick}>

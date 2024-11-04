@@ -28,6 +28,7 @@ export default function RootLayout({
         <html lang="en">
         <body
             className={`relative min-h-screen overflow-x-hidden bg-background font-sans antialiased transition-[background] flex flex-col ${geistSans.variable} ${geistMono.variable} antialiased`}
+            suppressHydrationWarning={true}
         >
         <main className="flex-grow max-w-7xl w-full mx-auto pt-10 pb-12 flex flex-col gap-9 px-6 lg:px-8">
             <Providers>
