@@ -16,12 +16,12 @@ But the logic of fetching is the same and done for both sample data and api.
 - **Testing**: Jest
 
 ## Bonus 
-- **Data Fetching**: Shadcn UI
-- **Component Library**: Shadcn UI
-- **Responsive**: YES
-- **Loading and error handling**: YES
-- **Containerization** Docker
-- **Testing**: Jest
+- **Data Fetching**: Shadcn UI ✔️
+- **Component Library**: Shadcn UI ✔️
+- **Responsive**: YES ✔️
+- **Loading and error handling**: YES ✔️
+- **Containerization** Docker ✔️
+- **Testing**: Jest ✔️
 ## Steps to run the app:
 
 ```bash
