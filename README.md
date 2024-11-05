@@ -13,6 +13,7 @@ But the logic of fetching is the same and done for both sample data and api.
 - **Data Fetching**: React Query
 - **Component Library**: Shadcn UI
 - **Chart**: Chart.js
+- **Testing**: Jest
 
 ## Bonus 
 - **Data Fetching**: Shadcn UI
@@ -20,7 +21,8 @@ But the logic of fetching is the same and done for both sample data and api.
 - **Responsive**: YES
 - **Loading and error handling**: YES
 - **Containerization** Docker
-
+- **Testing**: Jest
+- 
 ## Steps to run the app:
 
 ```bash
