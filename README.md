@@ -22,7 +22,6 @@ But the logic of fetching is the same and done for both sample data and api.
 - **Loading and error handling**: YES
 - **Containerization** Docker
 - **Testing**: Jest
-- 
 ## Steps to run the app:
 
 ```bash
