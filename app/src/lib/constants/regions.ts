@@ -9,7 +9,7 @@ export const regions = [
     { regionName: "Denmark 2", regionCode: "DK2" },
     { regionName: "France", regionCode: "FR" },
     { regionName: "Hungary", regionCode: "HU" },
-    { regionName: "Italy North", regionCode: "IT-North" },
+    { regionName: "Italy North", regionCode: "IT" },// for showcase of error
     { regionName: "Netherlands", regionCode: "NL" },
     { regionName: "Norway 2", regionCode: "NO2" },
     { regionName: "Poland", regionCode: "PL" },

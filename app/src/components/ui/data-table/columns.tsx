@@ -62,7 +62,7 @@ export const columns: ColumnDef<Region>[] = [
             return (
                 <div className="hidden sm:inline-block">
                     {row.original.price === 0 ?
-                        <Loader className="animate-spin"/> : row.original.price + '€'}
+                        <Loader className="animate-spin"/> : row.original.price + ' €'}
                 </div>
             )
         }
