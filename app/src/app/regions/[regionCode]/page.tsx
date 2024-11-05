@@ -4,6 +4,10 @@ import {fetchCurrentPrice} from "@/lib/api";
 import {dehydrate, HydrationBoundary, QueryClient} from "@tanstack/react-query";
 import CurrentPrices from "@/app/regions/[regionCode]/current-prices";
 import DailyPrices from "@/app/regions/[regionCode]/daily-prices";
+import { buttonVariants} from "@/components/ui/button";
+import {cn} from "@/lib/utils";
+import Link from "next/link";
+import {ArrowLeft} from "lucide-react";
 
 // @ts-ignore
 export default async function RegionDetail({params: {regionCode}}) {
@@ -38,8 +42,16 @@ export default async function RegionDetail({params: {regionCode}}) {
                         <DailyPrices regionCode={regionCode}/>
                     </TabsContent>
                 </HydrationBoundary>
-
             </Tabs>
+            <div className='flex justify-start cursor-pointer'>
+                <Link
+                    href="/"
+                    className={cn(buttonVariants(), "text-center font-bold rounded-lg text-white", "flex items-center bg-blue-600")}
+                >
+                    <ArrowLeft/>
+                    Back to main page
+                </Link>
+            </div>
         </>
 
     );
