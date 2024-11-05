@@ -5,9 +5,29 @@ import {Region} from "@/lib/interfaces/Region";
 import {ArrowUpDown, Loader} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {useRouter} from "next/navigation";
+import {Badge} from "@/components/ui/badge";
 
 //Columns of the data table
 export const columns: ColumnDef<Region>[] = [
+    {
+        accessorKey: "regionName",
+        header: ({column}) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Region name
+                    <ArrowUpDown className="ml-2 h-4 w-4"/>
+                </Button>
+            );
+        },
+        cell:({row}) => {
+            return (
+                <Badge>{row.original.regionName}</Badge>
+            )
+        }
+    },
     {
         accessorKey: "regionCode",
         header: ({column}) => {
@@ -29,20 +49,6 @@ export const columns: ColumnDef<Region>[] = [
                 </div>
             )
         }
-    },
-    {
-        accessorKey: "regionName",
-        header: ({column}) => {
-            return (
-                <Button
-                    variant="ghost"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                >
-                    Region name
-                    <ArrowUpDown className="ml-2 h-4 w-4"/>
-                </Button>
-            );
-        },
     },
     {
         accessorKey: "price",
